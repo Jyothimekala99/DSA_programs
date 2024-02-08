@@ -37,6 +37,26 @@ public class Linkedlist {
         }
         System.out.println(count);
     }  
+
+    //To insert element at middle position
+    public static Node addMiddle(int data, Node head) {
+        if (head == null) {
+            head = new Node(data);
+        } else {
+            Node slow = head;
+            Node fast = head;
+            while (fast.next != null && fast.next.next != null) {
+                fast = fast.next.next;
+                slow = slow.next;
+            }
+            Node newNode = new Node(data);
+            newNode.next = slow.next;
+            slow.next = newNode;
+        }
+        return head;
+    }
+    
+
    // To insert element at last position
    public static void addLast(int data){
     Node temp = head;
@@ -52,6 +72,20 @@ public class Linkedlist {
     head = head.next;
     }
 
+    //To delete the element at middle
+    public static Node deleteMiddle(Node head) {
+        Node temp = head;
+        Node slow = head;
+        Node fast = head;
+        while (fast.next != null && fast.next.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            temp = temp.next;
+        }
+        temp.next = temp.next.next;
+        return head;
+    }
+
     // To delete the element at last
     public static void deleteLast() {
         Node temp = head;
@@ -61,25 +95,108 @@ public class Linkedlist {
         temp.next = null;    
     }
 
+    //To insert at given position
+    public static Node addAtGivenPosition(int data, int pos, Node head) {
+        Node temp = head;
+        if (head == null) {
+            head = new Node(data);
+        } else {
+
+            int count = 1;
+            while (count != pos - 1) {
+                count = count + 1;
+                temp = temp.next;
+            }
+        }
+        Node newNode = new Node(data);
+        newNode.next = temp.next;
+        temp.next = newNode;
+        return head;
+    }
+
+    //Delete at certain position
+    public static Node deleteAtGivenPosition(Node head, int pos) {
+        Node temp = head;
+        int count = 1;
+        while (count != pos - 1) {
+            count = count + 1;
+            temp = temp.next;
+        }
+        temp.next = temp.next.next;
+        return head;
+    }
+
+
+
+    //Delete K From last
+    public static Node deleteKFromLast(Node head, int K) {
+        Node fast = head;
+        while (K != 0 && fast != null) {
+            fast = fast.next;
+            K--;
+        }
+        if (K != 0) {
+            return head;
+        }
+        if (fast == null) {
+            head = head.next;
+            return head;
+        }
+        Node slow = head;
+        while (fast.next != null) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        slow.next = slow.next.next;
+        return head;
+    }
+
+    //Reverse of linkedlist
+    public static Node reverseLinkedList(Node head) {
+        Node prev = null;
+        Node curr = head;
+        Node next;
+        while (curr != null) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+
     public static void main(String[] args) {
         head=new Node(10);
         head.next=new Node(20);
         head.next.next=new Node(30);
         head.next.next.next=new Node(40);
         head.next.next.next.next=new Node(50);
+        head.next.next.next.next.next=new Node(60);
         printLL(head);
         addFirst(100);
         printLL(head);
         countNodes();
+        addMiddle(50,head);
+        printLL(head);
         addLast(200);
         printLL(head);
         deleteFirst();
+        deleteMiddle(head);
         deleteLast();
         printLL(head);
+        addAtGivenPosition(400,5,head);
+        printLL(head);
+        deleteAtGivenPosition(head,3);
+        printLL(head);
+        int K=1;
+        deleteKFromLast(head, K);
+        printLL(head);
+        reverseLinkedList(head);
+        printLL(head);
     
-        }  
+    }  
 
-    }
+}
 
     
     
