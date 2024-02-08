@@ -165,34 +165,100 @@ public class Linkedlist {
         return prev;
     }
 
+    //To sort colors
+    public static Node sortColors(){
+        Node zeroHead = new Node(-1);
+        Node oneHead = new Node(-1);
+        Node twoHead = new Node(-1);
+        Node zero = zeroHead;
+        Node one = oneHead;
+        Node two=twoHead;
+        Node temp = head;
+        while(temp != null){
+            if(temp.data == 0){
+                zero.next = temp;
+                zero = zero.next;
+            }
+            else if(temp.data == 1){
+                one.next = temp;
+                one = one.next;
+            }
+            else{
+                two.next = temp;
+                two = two.next;
+            }
+            temp = temp.next;
+        }
+        two.next = null;
+        if(oneHead.next == null){
+            zero.next = twoHead.next;
+        }
+        else{
+            zero.next = oneHead.next;
+        }
+        one.next = twoHead.next;
+        return zeroHead.next;
+    }
+
+    //To seggregate even odd
+    public static Node evenOddSegregate() {
+        Node evenHead = new Node(-1);
+        Node oddHead = new Node(-1);
+        Node even = evenHead;
+        Node odd = oddHead;
+        Node temp = head;
+        int index = 0;
+        while (temp != null) {
+            if (index % 2 == 0) {
+                even.next = temp;
+                even = even.next;
+            } else {
+                odd.next = temp;
+                odd = odd.next;
+            }
+            index++;
+            temp = temp.next;
+        }
+        even.next = oddHead.next;
+        return evenHead.next;
+    }
+
     public static void main(String[] args) {
-        head=new Node(10);
-        head.next=new Node(20);
-        head.next.next=new Node(30);
-        head.next.next.next=new Node(40);
-        head.next.next.next.next=new Node(50);
-        head.next.next.next.next.next=new Node(60);
+        head=new Node(1);
+        head.next=new Node(0);
+        head.next.next=new Node(2);
+        head.next.next.next=new Node(0);
+        head.next.next.next.next=new Node(0);
+        head.next.next.next.next.next=new Node(1);
+        // printLL(head);
+        // addFirst(100);
+        // printLL(head);
+        // countNodes();
+        // addMiddle(50,head);
+        // printLL(head);
+        // addLast(200);
+        // printLL(head);
+        // // deleteFirst();
+        // // deleteMiddle(head);
+        // // deleteLast();
+        // // printLL(head);
+        // addAtGivenPosition(400,5,head);
+        // printLL(head);
+        // // deleteAtGivenPosition(head,3);
+        // // printLL(head);
+        // // int K=1;
+        // // deleteKFromLast(head, K);
+        // // printLL(head);
+        // head = reverseLinkedList(head);
+        // printLL(head);
+        System.out.println("sorting the colors:");
+        head=sortColors();
         printLL(head);
-        addFirst(100);
+        evenOddSegregate();
+        System.out.println("even odd segregate:");
         printLL(head);
-        countNodes();
-        addMiddle(50,head);
-        printLL(head);
-        addLast(200);
-        printLL(head);
-        deleteFirst();
-        deleteMiddle(head);
-        deleteLast();
-        printLL(head);
-        addAtGivenPosition(400,5,head);
-        printLL(head);
-        deleteAtGivenPosition(head,3);
-        printLL(head);
-        int K=1;
-        deleteKFromLast(head, K);
-        printLL(head);
-        reverseLinkedList(head);
-        printLL(head);
+        
+
     
     }  
 
