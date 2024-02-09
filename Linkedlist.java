@@ -223,13 +223,47 @@ public class Linkedlist {
         return evenHead.next;
     }
 
+    //Palindrom
+    public static boolean palindrom(){
+        Node slow=head;
+        Node fast=head;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        Node prev=null;
+        Node curr=slow;
+        Node next;
+        //palindrom();
+        while(curr!=null){
+            next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        Node temp=head;
+        while(temp!=null&& prev!=null){
+            if(temp.data != prev.data) return false;
+            temp=temp.next;
+            prev=prev.next;;
+        }
+        return true;
+    }
+
+
     public static void main(String[] args) {
-        head=new Node(1);
-        head.next=new Node(0);
-        head.next.next=new Node(2);
-        head.next.next.next=new Node(0);
-        head.next.next.next.next=new Node(0);
-        head.next.next.next.next.next=new Node(1);
+        head=new Node(10);
+        head.next=new Node(20);
+        head.next.next=new Node(30);
+         head.next.next.next=new Node(20);
+        head.next.next.next.next=new Node(10);
+        //head.next.next.next.next.next=new Node(10);
+        // head=new Node(1);
+        // head.next=new Node(0);
+        // head.next.next=new Node(2);
+        // head.next.next.next=new Node(0);
+        // head.next.next.next.next=new Node(0);
+        // head.next.next.next.next.next=new Node(1);
         // printLL(head);
         // addFirst(100);
         // printLL(head);
@@ -238,25 +272,28 @@ public class Linkedlist {
         // printLL(head);
         // addLast(200);
         // printLL(head);
-        // // deleteFirst();
-        // // deleteMiddle(head);
-        // // deleteLast();
-        // // printLL(head);
+        // deleteFirst();
+        // deleteMiddle(head);
+        // deleteLast();
+        // printLL(head);
         // addAtGivenPosition(400,5,head);
         // printLL(head);
-        // // deleteAtGivenPosition(head,3);
-        // // printLL(head);
-        // // int K=1;
-        // // deleteKFromLast(head, K);
-        // // printLL(head);
+        //  deleteAtGivenPosition(head,3);
+        // printLL(head);
+        // int K=1;
+        // deleteKFromLast(head, K);
+        // printLL(head);
         // head = reverseLinkedList(head);
         // printLL(head);
-        System.out.println("sorting the colors:");
-        head=sortColors();
+        // System.out.println("sorting the colors:");
+        // head=sortColors();
+        // printLL(head);
+        // evenOddSegregate();
+        // System.out.println("even odd segregate:");
+        // printLL(head);
+        //palindrom();
         printLL(head);
-        evenOddSegregate();
-        System.out.println("even odd segregate:");
-        printLL(head);
+        System.out.println(palindrom());
         
 
     
