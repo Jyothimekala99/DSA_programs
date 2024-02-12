@@ -8,6 +8,7 @@ public class Linkedlist {
             next = null;
         }
     }
+
     //To create linkedlist
     public static Node head;
     public static void printLL(Node head) {
@@ -18,12 +19,14 @@ public class Linkedlist {
         }
         System.out.println("null");    
     }
+
     // To insert the Element at first position
     public static void addFirst(int data){
        Node newNode = new Node(data);
        newNode.next=head;
        head = newNode;
     }
+
     // To count the nodes
     public static void countNodes(){
         Node temp = head;
@@ -52,7 +55,7 @@ public class Linkedlist {
         }
         return head;
     }
-
+    
 
    // To insert element at last position
    public static void addLast(int data){
@@ -63,6 +66,7 @@ public class Linkedlist {
     Node newNode = new Node(data);
     temp.next = newNode;
    }
+
    // To delete the element at first
    public static void deleteFirst(){
     head = head.next;
@@ -246,13 +250,130 @@ public class Linkedlist {
         return true;
     }
 
+    //To roatate
+    public static Node rotate(int k){
+        Node temp=head;
+        int count=0;
+        while(temp.next!=null){
+            count++;
+            temp=temp.next;
+        }
+        count++;
+        if(k%count==0) return head;
+        k=k%count;
+        temp.next=head;
+        Node prev=null;
+        for(int i=0;i<count-k+1;i++){
+            prev=temp;
+            temp=temp.next;
+        }
+        prev.next=null;
+        head=temp;
+        return head;
+    }
+
+    //To remove loop
+    public static Node removeLoop(Node head) {
+        Node slow = head;
+        Node fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast)
+                break;
+        }
+        if (slow == fast) {
+            slow = head;
+            if (slow == fast) {
+                while (fast.next != slow) {
+                    fast = fast.next;
+                }
+            } else {
+                while (slow.next != fast.next) {
+                    slow = slow.next;
+                    fast = fast.next;
+                }
+                fast.next = null;
+            }
+            // fast.next = null;
+
+        }
+        return head;
+    }
+
+    //To addTwolinkedlists
+    public static Node addTwoLinkedlists(Node l1, Node l2) {
+        Node temp1 = l1;
+        Node temp2 = l2;
+        int carry = 0;
+        Node head = new Node(-1);
+        Node newHead = head;
+        while (temp1 != null || temp2 != null) {
+            int sum = 0;
+            if (temp1 != null) {
+                sum += temp1.data;
+                temp1 = temp1.next;
+            }
+            if (temp2 != null) {
+                sum += temp2.data;
+                temp2 = temp2.next;
+            }
+            sum += carry;
+            carry = sum / 10;
+            Node newNode = new Node(sum % 10);
+            newHead.next = newNode;
+            newHead = newNode;
+        }
+        Node newNode = new Node(carry);
+        if (carry != 0) {
+            newHead.next = newNode;
+        }
+        return head.next;
+
+    }
+
+//To intersection of linkedlist
+    public static Node head2;
+    public static int lenOfLL1(){
+        Node temp = head;
+        int count=0;
+        while(temp!=null){
+            count++;
+            temp=temp.next;
+        }
+        return count++;
+    }
+    public static int lenOfLL2(){
+        Node temp = head;
+        int count=0;
+        while(temp!=null){
+            count++;
+            temp=temp.next;
+        }
+        return count++;
+    }
+    public static void intersectionOfLL(){
+        int len1=lenOfLL1();
+        int len2=lenOfLL2();
+        if(len1>len2){
+            int steps=len1-len2;
+            Node temp=head;
+            while(steps!=0){
+                head=head.next;
+                steps--;
+            }
+        }
+    }
+
+    
+           
 
     public static void main(String[] args) {
-        head=new Node(10);
-        head.next=new Node(20);
-        head.next.next=new Node(30);
-         head.next.next.next=new Node(20);
-        head.next.next.next.next=new Node(10);
+        // head=new Node(10);
+        // head.next=new Node(20);
+        // head.next.next=new Node(30);
+        // head.next.next.next=new Node(20);
+        // head.next.next.next.next=new Node(10);
         //head.next.next.next.next.next=new Node(10);
         // head=new Node(1);
         // head.next=new Node(0);
@@ -287,21 +408,37 @@ public class Linkedlist {
         // evenOddSegregate();
         // System.out.println("even odd segregate:");
         // printLL(head);
-        //palindrom();
-        head.next.next.next=new Node(40);
-        head.next.next.next.next=new Node(50);
+        // palindrom();
+        // printLL(head);
+        // System.out.println(palindrom());
+        // head = removeLoop(head);
+        // printLL(head);
+        Node l1 = new Node(2);
+        l1.next = new Node(4);
+        l1.next.next = new Node(3);
+        l1.next.next.next = new Node(5);
+        //printLL(l1);
+        Node l2 = new Node(5);
+        l2.next = new Node(6);
+        l2.next.next = new Node(4);
+        l2.next.next.next = new Node(2);
+        // printLL(l2);
+        // head = addTwoLinkedlists(l1, l2);
+        // printLL(head);
+        lenOfLL1();
+        lenOfLL2();
+        intersectionOfLL();
         printLL(head);
-        addFirst(100);
-        printLL(head);
-        countNodes();
-        addLast(200);
-        printLL(head);
-        deleteFirst();
-        deleteLast();
-        printLL(head);
-        System.out.println(palindrom());
+       
+       
+        
+        
 
-
-
+    
     }  
-        }
+
+}
+
+    
+    
+
