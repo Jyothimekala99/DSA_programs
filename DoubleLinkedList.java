@@ -15,11 +15,23 @@ public class DoubleLinkedList {
         Node temp=head;
         while(temp!=null){
             System.out.print(temp.data+"<->");
-           // System.out.println(temp.prev.data+" "+temp.data+" "+temp.next.data);
             temp=temp.next;
         }
         System.out.print("null");
     }
+
+    //To reverse 
+    public static Node reverseDLL(Node head){
+        Node prev=null;
+        Node curr=head;
+        while(curr!=null){
+            prev=curr.prev;
+            curr.prev=curr.next;
+            curr.next=prev;
+            curr=curr.prev;
+        }
+        return prev.prev;
+    }    
     public static void main(String[] args) {
         head=new Node(1);
         head.next=new Node(2);
@@ -30,6 +42,8 @@ public class DoubleLinkedList {
         head.next.next.prev=head.next;
         head.next.next.next.prev=head.next.next;
         head.next.next.next.next.prev=head.next.next.next;
+        //printDLL();
+        head=reverseDLL(head);
         printDLL();
     }
 }
